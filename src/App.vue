@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <SiteNav v-if="CheckLogin"></SiteNav>
     <router-view />
   </div>
 </template>
@@ -30,3 +27,20 @@
   }
 }
 </style>
+
+
+<script>
+import SiteNav from '@/components/SiteNav'
+
+export default {
+  components: {
+    SiteNav,
+  },
+  computed: {
+    CheckLogin() {
+      var profile=  this.$store.getters['userModule/getUserProfile'];
+      return Object.keys(profile).length > 1
+    }
+  },
+}
+</script>
